@@ -41,7 +41,4 @@ def create_bet():
     return render_template('create_bet.html')
 
 
-
-
-if __name__ == "__main__":
     app.run(debug=True)
