@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, render_template, request
 from web3 import Web3, HTTPProvider, IPCProvider, WebsocketProvider
 import re
-import helper
 
 
 
@@ -13,27 +12,33 @@ def index():
     '''
     landing page 
     '''
-    block = web3.eth.getBlock('latest')
 
-    if request.form['CreateBet'] == 'create_bet':
-        render_template("create_bet.html")
+    if request.method == 'POST':
+        print ('test')
+        if request.form['CreateBet'] == 'create_bet':
+            return render_template("create_bet.html")
+    else:
+        return render_template('index.html', blockNR = '666', minerNR = '666')
 
-    return render_template('index.html', blockNR = block['number'], minerNR = block['miner'])
 
 
 
-
-@app.route('/create_key', methods = ['Get', 'post'])
+@app.route('/create_bet.html', methods = ['Get', 'post'])
 def create_bet():
     '''
         create a bet
     '''
     
+    
     if request.method == 'POST': #if the user has posted account data@
-        featureList = request.form.getlist('checkbox')
+        featureList = request.form.to_dict()
         print (featureList)
     
-        return render_template(created_bet)
+        return render_template('create_bet.html', betInfo = featureList)
+    
+
+    
+    return render_template('create_bet.html')
 
 
 
