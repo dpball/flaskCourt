@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, render_template, request
 from web3 import Web3, HTTPProvider, IPCProvider, WebsocketProvider
 import re
-import os
 
 
 
@@ -44,5 +43,5 @@ def create_bet():
 
 
 
-port = int(os.environ.get('PORT', 5000))
-app.run(host='0.0.0.0', port=port, debug=True)
+if __name__ == "__main__":
+    app.run()
